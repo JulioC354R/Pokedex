@@ -60,3 +60,4 @@ if resposta_da_API.status_code == 200:
         print(golpe)
 
 print(f'TIPO: ' , type(golpe))
+
