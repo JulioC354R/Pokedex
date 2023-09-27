@@ -93,25 +93,27 @@ if resposta_da_API.status_code == 200:
         endpoint_type_PK = endpoint_type_PK['type']['url']
         resposta_type_PK = requests.get(endpoint_type_PK)
         data_type = resposta_type_PK.json()
-        print(endpoint_type_PK)
 
-        for tipos_dano in data_type['damage_relations']:
-            lista_tipos_dano = data_type['damage_relations'][tipos_dano]
-            lista_double_damage_from.append(double_damage_from)
+        #lista dentro de dois dicionarios
 
-        for tipos_dano in data_type['damage_relations']:
-            
- #       for damage_relation in data_type['damage_relations']:
- #           for relation in data_type['damage_relations'][damage_relation]:
-
- #               nome = relation['name']
-  #              print(nome)
-
-
-        
-
-print (lista_double_damage_from)
-
-
-
-        
+        for damage_relation in data_type['damage_relations']:
+            for relation in data_type['damage_relations'][damage_relation]:
+                name = relation ['name']
+                if damage_relation == 'double_damage_from':
+                    lista_double_damage_from.append(name)
+                elif damage_relation == 'double_damage_to':
+                    lista_double_damage_to.append(name)
+                elif damage_relation == 'half_damage_from':
+                    lista_half_damage_from.append(name)
+                elif damage_relation == 'half_damage_to':
+                    lista_half_damage_to.append(name)
+                elif damage_relation == 'no_damage_from':
+                    lista_no_damage_from.append(name)
+                elif damage_relation == 'no_damage_to':
+                    lista_no_damage_to.append(name)
+        print(f'O seu pokemon do tipo ', tipo_pokemon, ' leva dobro de dano para ' , lista_double_damage_from)
+        print(f'O seu pokemon do tipo ', tipo_pokemon, ' causa dobro de dano em ' , lista_double_damage_to)
+        print(f'O seu pokemon do tipo ', tipo_pokemon, ' leva dano normal em ' , lista_half_damage_from)
+        print(f'O seu pokemon do tipo ', tipo_pokemon, ' causa dano normal em ' , lista_half_damage_to)
+        print(f'O seu pokemon do tipo ', tipo_pokemon, ' é imune aos danos dos tipos ' , lista_no_damage_from)
+        print(f'O seu pokemon do tipo ', tipo_pokemon, ' não causa aos danos dos tipos ' , lista_no_damage_to)
