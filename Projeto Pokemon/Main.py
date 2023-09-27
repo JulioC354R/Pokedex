@@ -54,10 +54,64 @@ if resposta_da_API.status_code == 200:
 
 #utilizando o for eu defino move que está dentro do "data" e busco o dicionário moves, dentro dele há dicionários de
 #cada golpe, por isso defini o golpe como dentro do move o valor da chave "name"
+    lista_golpes = []
     for move in data['moves']:
         golpe = move['move']['name']
-        print(f'Golpes: ', golpe)
-        print(golpe)
+        lista_golpes.append(golpe)
 
-print(f'TIPO: ' , type(golpe))
+    print(f'Golpes: ', lista_golpes)
 
+
+##########      TERCEIRA FASE       ##############
+
+    lista_status = []
+    for stats in data['stats']: 
+        nome_status = stats['stat']['name']
+        status_base = stats['base_stat']
+        lista_status.append(nome_status)
+        lista_status.append(status_base)
+
+    print(f'Status do Pokemon: ', lista_status)
+
+    lista_tipos = []
+    for types in data['types']:
+        tipo_pokemon = types['type']['name']
+        lista_tipos.append(tipo_pokemon)
+        
+    print(f'Tipos do ', nome_pokemon, ': ', lista_tipos)
+
+##########      FASE FINAL      ############
+
+    lista_double_damage_from = []
+    lista_double_damage_to = []
+    lista_half_damage_from = []
+    lista_half_damage_to = []
+    lista_no_damage_from = []
+    lista_no_damage_to = []
+
+    for endpoint_type_PK in data['types']:
+        endpoint_type_PK = endpoint_type_PK['type']['url']
+        resposta_type_PK = requests.get(endpoint_type_PK)
+        data_type = resposta_type_PK.json()
+        print(endpoint_type_PK)
+
+        for tipos_dano in data_type['damage_relations']:
+            lista_tipos_dano = data_type['damage_relations'][tipos_dano]
+            lista_double_damage_from.append(double_damage_from)
+
+        for tipos_dano in data_type['damage_relations']:
+            
+ #       for damage_relation in data_type['damage_relations']:
+ #           for relation in data_type['damage_relations'][damage_relation]:
+
+ #               nome = relation['name']
+  #              print(nome)
+
+
+        
+
+print (lista_double_damage_from)
+
+
+
+        
