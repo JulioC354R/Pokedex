@@ -87,6 +87,7 @@ if resposta_da_API.status_code == 200:
     lista_half_damage_to = []
     lista_no_damage_from = []
     lista_no_damage_to = []
+    i = 0
 
     for endpoint_type_PK in data['types']:
         endpoint_type_PK = endpoint_type_PK['type']['url']
@@ -112,12 +113,14 @@ if resposta_da_API.status_code == 200:
                     lista_no_damage_from.append(name)
                 elif damage_relation == 'no_damage_to':
                     lista_no_damage_to.append(name)
+        tipo_pokemon = lista_tipos[i]
         print(f'O seu pokemon do tipo ', tipo_pokemon, ' leva dobro de dano para ' , lista_double_damage_from)
         print(f'O seu pokemon do tipo ', tipo_pokemon, ' causa dobro de dano em ' , lista_double_damage_to)
         print(f'O seu pokemon do tipo ', tipo_pokemon, ' leva dano normal em ' , lista_half_damage_from)
         print(f'O seu pokemon do tipo ', tipo_pokemon, ' causa dano normal em ' , lista_half_damage_to)
         print(f'O seu pokemon do tipo ', tipo_pokemon, ' é imune aos danos dos tipos ' , lista_no_damage_from)
         print(f'O seu pokemon do tipo ', tipo_pokemon, ' não causa aos danos dos tipos ' , lista_no_damage_to)
+        i += 1
 
 
 ###### anotações ###########

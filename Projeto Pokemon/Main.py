@@ -1,33 +1,37 @@
-from Pokemon import MeuPokemon
-from DamageRelations import TipoPokemon
+from Pokemon import MyPokemon
+from DamageRelations import TypePokemon
 
 import requests
 
-print(' BEM VINDO A POKEDEX ')
-verificacao = False
-while verificacao == False:
-    numero_pokemon = int(input('Insira o número do Pokemon desejado\n'))
-    if numero_pokemon >= 1 and numero_pokemon <= 905:
-        verificacao = True
+print('------- BEM VINDO A POKEDEX -------')
+print('###################################')
+verification = False
+while verification == False:
+    poker_number = int(input('Insira o número do Pokemon desejado...\n'))
+    if poker_number >= 1 and poker_number <= 905:
+        verification = True
     else:
         print('Por favor insira um número entre 1 e 905')
 
-endpoint = f'https://pokeapi.co/api/v2/pokemon/{numero_pokemon}'
+endpoint = f'https://pokeapi.co/api/v2/pokemon/{poker_number}'
 resposta_da_API = requests.get(endpoint)
 
 data = resposta_da_API.json()
 
-pokemon = MeuPokemon
-nome = pokemon.get_nome_pokemon(data)
-imagem = pokemon.get_image_pokemom(data)
-golpes = pokemon.get_golpes_pokemon(data)
+pokemon = MyPokemon
+name = pokemon.get_nome_pokemon(data)
+image = pokemon.get_image_pokemom(data)
+moves = pokemon.get_golpes_pokemon(data)
 status = pokemon.get_status_pokemon(data)
-tipos =  pokemon.get_tipos_pokemon(data)
+types =  pokemon.get_tipos_pokemon(data)
+pokemon_descripion = [name, image, moves, status, types]
 
-print(nome)
-print(imagem)
-print(golpes)
-print(status)
-print(tipos)
+datas_type = TypePokemon.get_datas_type(data)
 
+pokemon.print_pokemon_description(pokemon_descripion)
 
+i=0
+for damage_list in datas_type:
+    damage_list = TypePokemon.get_damage_list(datas_type[i])
+    TypePokemon.print_damage_list(types[i], damage_list)
+    i += 1
