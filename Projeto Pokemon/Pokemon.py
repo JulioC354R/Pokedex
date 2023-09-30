@@ -55,11 +55,11 @@ class MyPokemon:
         print(f'Imagem do '          , desc[0], ':\n', desc[1],'\n ', line)
         
         print(f'Lista de Golpes do  ', desc[0], ':\n')
-        moves_per_line = 7
+        moves_per_line = 6
         moves = desc[2]
 
         for i, move in enumerate(moves, start=1):
-            print(f"{move:<15}", end="")
+            print(f"{move:<20}", end="")
             if i % moves_per_line == 0:
                 print()
         
