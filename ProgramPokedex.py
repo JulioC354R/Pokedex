@@ -14,6 +14,8 @@ data = response.json()
 pk_name = ''
 pk_image = ''
 pk_moves = []
+pk_stats = []
+pk_types= []
 
 print('#############        DESAFIO 1       ###############\n\n')
 
@@ -44,7 +46,32 @@ for keys, value in data.items():
                     for key_move, value_move in value_moves.items():
                         if key_move == 'name':
                             pk_moves.append(value_move)
+    if keys == 'stats':
+        for element_stats in value:
+            for keys_stats, value_stats in element_stats.items():
+                if keys_stats == 'stat':
+                    for keys_stat, value_stat in value_stats.items():
+                        if keys_stat == 'name':
+                            pk_stats.append(value_stat)
+                if keys_stats == 'base_stat':
+                    pk_stats.append(value_stats)
+
+                    
                         
 
 print(pk_moves)
-                    
+print(pk_stats)
+
+print('#############        DESAFIO 3       ###############\n\n')
+
+for key, value in data.items():
+    if key == 'types':
+        for element_types in value:
+            for key_types, value_types in element_types.items():
+                if key_types == 'type':
+                    for key_type, value_type in value_types.items():
+                        if key_type == 'name':
+                            pk_types.append(value_type)
+
+
+print(pk_types)
