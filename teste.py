@@ -24,3 +24,5 @@ for i, move in enumerate(moves, start=1):
 # Adicionar uma quebra de linha se o número total de golpes não for um múltiplo de golpes_por_linha
 if len(moves) % golpes_por_linha != 0:
     print()
+
+
